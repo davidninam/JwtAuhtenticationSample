@@ -1,0 +1,4 @@
+.idea
+auth-server/target
+auth-client/node_modules
+auth-client/dist

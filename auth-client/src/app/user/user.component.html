@@ -1,0 +1,7 @@
+<div class="jumbotron col-8 offset-2 mt-5" *ngIf="username">
+    <h1>{{username}}</h1>
+
+    <h2>Authorities</h2>
+
+    <span *ngFor="let authority of authorities">{{authority.authority}}</span>
+</div>
