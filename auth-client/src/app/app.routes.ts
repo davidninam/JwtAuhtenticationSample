@@ -1,11 +1,11 @@
-import {RouterModule} from "@angular/router";
-import {SecureGuard} from "./security/guards/secure.guard";
-import {HomeComponent} from "./home/home.component";
-import {LoginComponent} from "./login/login.component";
-import {InsecureGuard} from "./security/guards/insecure.guard";
-import {UserComponent} from "./user/user.component";
+import {RouterModule, Routes} from '@angular/router';
+import {SecureGuard} from './security/guards/secure.guard';
+import {HomeComponent} from './home/home.component';
+import {LoginComponent} from './login/login.component';
+import {InsecureGuard} from './security/guards/insecure.guard';
+import {UserComponent} from './user/user.component';
 
-let APP_ROUTES: any[] = [
+const APP_ROUTES: Routes = [
     {
         path: '',
         component: LoginComponent,
@@ -35,7 +35,7 @@ let APP_ROUTES: any[] = [
 ];
 export let AppRouterModule = RouterModule
     .forRoot(
-        APP_ROUTES ,
+        APP_ROUTES,
         {
             useHash: false
         }

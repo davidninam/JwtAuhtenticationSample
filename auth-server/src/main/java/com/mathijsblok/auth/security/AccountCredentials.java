@@ -1,6 +1,6 @@
 package com.mathijsblok.auth.security;
 
-public class Login {
+public class AccountCredentials {
 
     private String username;
     private String password;

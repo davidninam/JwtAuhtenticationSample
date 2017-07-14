@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {HttpService} from "../services/http.service";
+import {Component, OnInit} from '@angular/core';
+import {HttpService} from '../services/http.service';
 
 
 @Component({
@@ -7,7 +7,7 @@ import {HttpService} from "../services/http.service";
     templateUrl: './loading-spinner.component.html',
     styleUrls: ['./loading-spinner.component.scss']
 })
-export class LoadingSpinnerComponent implements OnInit{
+export class LoadingSpinnerComponent implements OnInit {
 
     loading: boolean;
 
@@ -15,7 +15,7 @@ export class LoadingSpinnerComponent implements OnInit{
         this.loading = false;
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.http.loading.subscribe(loading => {
             this.loading = loading;
         });

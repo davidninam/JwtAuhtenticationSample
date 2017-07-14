@@ -1,9 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Headers, Http} from "@angular/http";
-import {Observable, Subject} from "rxjs";
-import {Promise} from "es6-promise";
-import {LocalStorageService} from "angular-2-local-storage";
-import {Router} from "@angular/router";
+import {Injectable} from '@angular/core';
+import {Headers, Http} from '@angular/http';
+import {Promise} from 'es6-promise';
+import {LocalStorageService} from 'angular-2-local-storage';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class HttpService {
@@ -15,20 +16,18 @@ export class HttpService {
         return this._loading.asObservable();
     }
 
-    constructor(
-            private http: Http,
-            private localStorageService: LocalStorageService,
-            private router: Router
-    ) {
+    constructor(private http: Http,
+                private localStorageService: LocalStorageService,
+                private router: Router) {
         this.requestCount = 0;
         this._loading = new Subject<boolean>();
         this._loading.next(false);
     }
 
     private buildHeaders(): Headers {
-        let authentication: any = this.localStorageService.get('authentication');
-        let headers: Headers = new Headers({'X-Requested-With': 'XMLHttpRequest'});
-        if(authentication && authentication.token){
+        const authentication: any = this.localStorageService.get('authentication');
+        const headers: Headers = new Headers({'X-Requested-With': 'XMLHttpRequest'});
+        if (authentication && authentication.token) {
             headers.append('Authorization', 'Bearer ' + authentication.token);
         }
         return headers;
@@ -67,21 +66,24 @@ export class HttpService {
     }
 
     private setLoading(loading: boolean) {
-        let lastVal = this.requestCount;
+        const lastVal = this.requestCount;
 
-        if (loading) this.requestCount++;
-        else this.requestCount--;
+        if (loading) {
+            this.requestCount++;
+        } else {
+            this.requestCount--;
+        }
 
-        if (this.requestCount == 0) this._loading.next(false);
-        if (this.requestCount == 1 && lastVal == 0) this._loading.next(true);
+        if (this.requestCount === 0) this._loading.next(false);
+        if (this.requestCount === 1 && lastVal === 0) this._loading.next(true);
     }
 
     private handleError(error: any, url: string): Promise<any> {
-        if(error.status == 403){
+        if (error.status === 403) {
             this.localStorageService.remove('authentication');
             this.router.navigate(['/']);
         }
         console.error('An error occurred with request to ', url);
-        return Promise.reject(error)
+        return Promise.reject(error);
     }
 }
